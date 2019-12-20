@@ -13,13 +13,26 @@ const routes: Routes = [
     loadChildren: () => import('./pages/update-estudiantes/update-estudiantes.module').then( m => m.UpdateEstudiantesPageModule)
   },
   {
-    path: 'detalle-asignatura',
+    path: 'subject/:id',
     loadChildren: () => import('./pages/detalle-asignatura/detalle-asignatura.module').then( m => m.DetalleAsignaturaPageModule)
   },
   {
     path: 'modal',
     loadChildren: () => import('./pages/modal/modal.module').then( m => m.ModalPageModule)
   },
+  {
+    path: 'add-subject-modal',
+    loadChildren: () => import('./pages/add-subject-modal/add-subject-modal.module').then( m => m.AddSubjectModalPageModule)
+  },
+  {
+    path: 'listado-modal',
+    loadChildren: () => import('./pages/listado-modal/listado-modal.module').then( m => m.ListadoModalPageModule)
+  },
+  {
+    path: 'add-student-subject-modal',
+    loadChildren: () => import('./pages/add-student-subject-modal/add-student-subject-modal.module').then( m => m.AddStudentSubjectModalPageModule)
+  },
+
 
 ];
 

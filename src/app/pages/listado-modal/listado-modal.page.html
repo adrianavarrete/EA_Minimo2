@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+
+    <ion-title>{{typeList}} </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid fixed>
+      <ion-row>
+        <ion-col>
+          <ion-card>
+            <ion-card-content>
+              <table class="table">
+                <thead>
+                  <th>Nombre</th>
+                  <th>Dirección</th>
+                  <th>Fijo</th>
+                  <th>Móvil</th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let student of students">
+                    <td>{{ student.name }}</td>
+                    <td>{{ student.address }}</td>
+                    <td>{{ student.phones[0].value }}</td>
+                    <td>{{ student.phones[1].value }}</td>
+                  </tr>
+                </tbody>
+              </table>
+
+
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+  </ion-grid>
+
+</ion-content>

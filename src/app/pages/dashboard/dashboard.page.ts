@@ -10,6 +10,9 @@ import { StudentService } from '../../services/student.service';
 import { NgForm } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { AddStudentModalPage } from '../add-student-modal/add-student-modal.page';
+import { AddSubjectModalPage } from '../add-subject-modal/add-subject-modal.page';
+import { DetalleAsignaturaPage } from '../detalle-asignatura/detalle-asignatura.page';
+import { ListadoModalPage } from '../listado-modal/listado-modal.page';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
@@ -25,6 +28,7 @@ export class DashboardPage implements OnInit {
   studentsTelecos: Student[];
   studentsTelematica: Student[];
   studentsAeros: Student[];
+  students: Student[];
 
   singleSubject = new Subject();
   add: boolean;
@@ -41,11 +45,53 @@ export class DashboardPage implements OnInit {
     this.getStudents();
   }
 
-  async openModal() {
-   const myModal = await this.modalCtrl.create({
-     component: AddStudentModalPage
-   });
-   return await myModal.present();
+  async openModal(page: string, idSubject: string, students: Student[], list: string) {
+
+    var myModal: any;
+    var id: string;
+    console.log(page);
+
+    switch (page) {
+
+      case 'student':
+        myModal = await this.modalCtrl.create({
+          component: AddStudentModalPage
+        });
+        return await myModal.present();
+        break;
+
+      case 'subject':
+        myModal = await this.modalCtrl.create({
+          component: AddSubjectModalPage
+        });
+        return await myModal.present();
+        break;
+
+      case 'subjectDetail':
+        console.log(idSubject + '--------');
+        myModal = await this.modalCtrl.create({
+          component: DetalleAsignaturaPage,
+          componentProps: {
+            id: idSubject
+          }
+        });
+        return await myModal.present();
+        break;
+
+      case 'listado':
+        myModal = await this.modalCtrl.create({
+          component: ListadoModalPage,
+          componentProps: {
+            studentsList: students,
+            typeList: list
+          }
+        });
+        return await myModal.present();
+        break;
+
+
+    }
+
   }
 
   getSubjects() {
@@ -65,27 +111,40 @@ export class DashboardPage implements OnInit {
   }
 
   getStudentsTelecos() {
+
     this.studentService.getStudentsTelecos()
       .subscribe(res => {
         console.log(res);
-        this.studentsTelecos = res as Student[];
+        this.students = res as Student[];
+        this.openModal('listado', null, this.students, 'Telecos');
+
       });
+
   }
 
   getStudentsTelematica() {
+
     this.studentService.getStudentsTelematica()
       .subscribe(res => {
         console.log(res);
-        this.studentsTelematica = res as Student[];
+        this.students = res as Student[];
+        console.log(this.students);
+        this.openModal('listado', null, this.students, 'Telematica');
       });
+
+
   }
 
   getStudentsAeros() {
     this.studentService.getStudentsAeros()
       .subscribe(res => {
         console.log(res);
-        this.studentsAeros = res as Student[];
+        this.students = res as Student[];
+        this.openModal('listado', null, this.students, 'Aeros');
+
       });
+
+
   }
 
   addSubject(form: NgForm) {
@@ -194,9 +253,9 @@ export class DashboardPage implements OnInit {
 
 
 
-resetForm(form ?: NgForm) {
-  if (form) {
-    form.reset();
+  resetForm(form?: NgForm) {
+    if (form) {
+      form.reset();
+    }
   }
-}
 }

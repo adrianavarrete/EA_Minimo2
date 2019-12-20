@@ -10,7 +10,7 @@
   <ion-grid fixed>
     <form>
       <ion-row>
-        <ion-col size-md="6" offset-md="3">
+        <ion-col>
           <ion-card>
             <ion-card-header>
               <ion-card-title>Asignaturas</ion-card-title>
@@ -26,23 +26,26 @@
                     <td>{{subject.name}}</td>
                     <td>
                       <a (click)="subjectDetail(subject._id)">
-                        <i class="material-icons">info</i>
+                        <ion-icon name="information-circle-outline"></ion-icon>
                       </a>
                       <a (click)="deleteSubject(subject._id)">
-                        <i class="material-icons">delete</i>
+                        <ion-icon name="trash"></ion-icon>
                       </a>
                     </td>
                   </tr>
                 </tbody>
               </table>
-
+              <div>
+                <ion-button (click)="openModal('subject')" expand="block" type="submit" class="ion-no-margin"
+                  data-toggle="modal">Añadir Asignatura</ion-button>
+              </div>
             </ion-card-content>
           </ion-card>
         </ion-col>
       </ion-row>
 
       <ion-row>
-        <ion-col size-md="6" offset-md="3">
+        <ion-col>
           <ion-card>
             <ion-card-header>
               <ion-card-title>Estudiantes</ion-card-title>
@@ -59,18 +62,16 @@
                     <td>{{student.name}}</td>
                     <td>{{student.address}}</td>
                     <td>
-                      <a (click)="editStudent(student._id)">
-                        <i class="material-icons">edit</i>
-                      </a>
                       <a (click)="deleteStudent(student._id)">
-                        <i class="material-icons">delete</i>
+                        <ion-icon name="trash"></ion-icon>
                       </a>
                     </td>
                   </tr>
                 </tbody>
               </table>
               <div>
-                <ion-button (click)="openModal()" expand="block" type="submit" class="ion-no-margin" data-toggle="modal">Añadir Estudiante</ion-button>
+                <ion-button (click)="openModal('student')" expand="block" type="submit" class="ion-no-margin"
+                  data-toggle="modal">Añadir Estudiante</ion-button>
               </div>
 
             </ion-card-content>
@@ -78,27 +79,27 @@
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col size-md="6" offset-md="3">
+        <ion-col>
           <ion-card>
             <ion-card-header>
               <ion-card-title>Listados</ion-card-title>
             </ion-card-header>
             <ion-card-content>
               <div>
-                <ion-button (click)="getStudentsTelecos()" expand="block" type="submit" class="ion-no-margin" data-toggle="modal"
-                  data-target="#telecosModal">
+                <ion-button (click)="getStudentsTelecos()" expand="block" type="submit" class="ion-no-margin"
+                  data-toggle="modal" data-target="#telecosModal">
                   Lista estudiantes Sistemas de telecomunicaciones
                 </ion-button>
               </div>
               <div class="col-xs-12">
-                <ion-button (click)="getStudentsTelematica()" expand="block" type="submit" class="ion-no-margin" data-toggle="modal"
-                  data-target="#telematicaModal">
+                <ion-button (click)="getStudentsTelematica()" expand="block" type="submit" class="ion-no-margin"
+                  data-toggle="modal" data-target="#telematicaModal">
                   Lista estudiantes Telematica
                 </ion-button>
               </div>
               <div class="col-xs-12">
-                <ion-button (click)="getStudentsAeros()" expand="block" type="submit" class="ion-no-margin" data-toggle="modal"
-                  data-target="#aerosModal">
+                <ion-button (click)="getStudentsAeros()" expand="block" type="submit" class="ion-no-margin"
+                  data-toggle="modal" data-target="#aerosModal">
                   Lista estudiantes Sistemas Aeroespaciales
                 </ion-button>
               </div>

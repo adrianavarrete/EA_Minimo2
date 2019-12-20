@@ -1,10 +1,12 @@
 <ion-header>
   <ion-toolbar>
 
-    <ion-title>Añadir Estudiante {{subject.name}}</ion-title>
-      <ion-buttons slot="start">
-        <ion-back-button></ion-back-button>
-      </ion-buttons>
+    <ion-title>Añadir Estudiante en la Asignatura</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -13,26 +15,25 @@
     <ion-row>
       <ion-col>
         <ion-card>
+
           <ion-card-content>
             <table class="table">
               <thead>
+                <th>Check</th>
                 <th>Nombre</th>
                 <th>Dirección</th>
                 <th>Fijo</th>
-                <th>Movil</th>
-                <th>Operations</th>
+                <th>Móvil</th>
               </thead>
               <tbody>
-                <tr *ngFor="let student of students">
-                  <td>{{ student.name }}</td>
-                  <td>{{ student.address }}</td>
-                  <td>{{ student.phones[0].value }}</td>
-                  <td>{{ student.phones[1].value }}</td>
+                <tr *ngFor="let globalStudent of studentService.students">
                   <td>
-                    <a (click)="deleteStudentInSubject(student._id, subject._id)">
-                      <i class="material-icons">delete</i>
-                    </a>
+                    <button (click)="addStudentInSubject(globalStudent._id, subjectId)" data-dismiss="modal" class="btn btn-success">Añadir</button>
                   </td>
+                  <td>{{ globalStudent.name }}</td>
+                  <td>{{ globalStudent.address }}</td>
+                  <td>{{ globalStudent.phones[0].value }}</td>
+                  <td>{{ globalStudent.phones[1].value }}</td>
                 </tr>
               </tbody>
             </table>
